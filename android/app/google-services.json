@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "645685551316",
+    "project_id": "profilex-89497",
+    "storage_bucket": "profilex-89497.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:645685551316:android:2860bdc861c07587679b41",
+        "android_client_info": {
+          "package_name": "com.example.profile_x_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfYJshpFCywFsryZsaFVZ1Yp0ChYsUddI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
