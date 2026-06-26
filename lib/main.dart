@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-import 'package:profile_x_app/main_page.dart';
+import 'package:profile_x_app/views/login_screen.dart';
 import 'package:profile_x_app/providers/auth_provider.dart';
 
 void main() async {
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
-        home: const MainPage(),
+        home: const LoginScreen(),
       ),
     );
   }
