@@ -56,6 +56,35 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  Future<void> _loginWithGoogle() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final credential = await context.read<AuthServiceProvider>().signInWithGoogle();
+      
+      if (credential != null && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Google Login Successful!')),
+        );
+        // Navigate to home screen here
+      }
+    } catch (error) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(error.toString())),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -134,6 +163,23 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
 
                 const SizedBox(height: 32),
+
+                _isLoading
+                    ? const SizedBox.shrink() 
+                    : OutlinedButton.icon(
+                        onPressed: _loginWithGoogle,
+                        icon: Image.asset(
+                          'assets/googleIcon.png',
+                          height: 24,
+                          width: 24,
+                        ),
+                        label: const Text("Sign in with Google"),
+                        style: OutlinedButton.styleFrom(
+                          minimumSize: const Size(double.infinity, 50),
+                          foregroundColor: Colors.black,
+                          side: const BorderSide(color: Colors.white),
+                        ),
+                      ),
 
                 Center(
                   child: Column(

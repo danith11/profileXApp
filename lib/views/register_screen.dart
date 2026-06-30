@@ -12,6 +12,8 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+  
   bool _isLoading = false;
   Future<void> _login() async {
     final email = _emailController.text.trim();
@@ -115,7 +117,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const SizedBox(height: 16),
 
             TextField(
-              // controller: _emailController,
+              controller: _confirmPasswordController,
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
                 labelText: "Confirm Password",
