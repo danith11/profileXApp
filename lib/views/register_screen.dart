@@ -52,7 +52,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
       _emailController.clear();
       _passwordController.clear();
       _confirmPasswordController.clear();
-
     } catch (error) {
       if (mounted) {
         ScaffoldMessenger.of(
@@ -115,7 +114,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             colors: [
-              Colors.blue.shade600,
+              const Color.fromARGB(255, 0, 16, 162),
               Colors.blue.shade300,
               Colors.blue.shade100,
             ],
@@ -130,7 +129,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               "Sign Up",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 24,
+                fontSize: 32,
                 color: Colors.white,
               ),
             ),
@@ -143,7 +142,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
                 labelText: "Email",
-                border: OutlineInputBorder(),
+                hintText: "Enter your email",
+                border : OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey),
+                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                ),
               ),
             ),
             const SizedBox(height: 16),
@@ -153,8 +156,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
                 labelText: "Password",
-                border: OutlineInputBorder(),
+                hintText: "Enter your password",
+                border : OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey),
+                borderRadius: BorderRadius.all(Radius.circular(8.0)),
               ),
+              ),
+              
             ),
             const SizedBox(height: 16),
 
@@ -163,7 +171,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
                 labelText: "Confirm Password",
-                border: OutlineInputBorder(),
+                hintText: "Re-enter your password",
+                border : OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey),
+                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                ),
               ),
             ),
             const SizedBox(height: 16),
@@ -175,12 +187,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     onPressed: _signUp,
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 50),
-                      backgroundColor: const Color.fromARGB(255, 255, 217, 103),
+                      backgroundColor: const Color.fromARGB(255, 255, 43, 43),
                     ),
-                    child: const Text("Sign Up"),
+                    child: const Text(
+                      "SIGN UP",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
 
-            const SizedBox(height: 32),
+            const SizedBox(height: 16),
+
+            Text("Or"),
+
+            const SizedBox(height: 16),
 
             _isLoading
                 ? const CircularProgressIndicator(color: Colors.amber)

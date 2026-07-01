@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-import 'package:profile_x_app/views/login_screen.dart';
+// import 'package:profile_x_app/views/login_screen.dart';
 import 'package:profile_x_app/providers/auth_provider.dart';
+import 'package:profile_x_app/views/auth_gate.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,9 +25,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         ),
-        home: const LoginScreen(),
+        home: const AuthGate(),
       ),
     );
   }

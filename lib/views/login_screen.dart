@@ -44,7 +44,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
       _emailController.clear();
       _passwordController.clear();
-    
     } catch (error) {
       if (mounted) {
         ScaffoldMessenger.of(
@@ -108,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             colors: [
-              Colors.blue.shade600,
+              const Color.fromARGB(255, 0, 16, 162),
               Colors.blue.shade300,
               Colors.blue.shade100,
             ],
@@ -124,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   "Login",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 24,
+                    fontSize: 32,
                     color: Colors.white,
                   ),
                 ),
@@ -136,7 +135,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     labelText: "Email",
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -144,10 +146,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextField(
                   controller: _passwordController,
                   obscureText: true,
-                  decoration: const InputDecoration(
+                  decoration:  InputDecoration(
                     labelText: "Password",
-
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -161,14 +165,21 @@ class _LoginScreenState extends State<LoginScreen> {
                           backgroundColor: const Color.fromARGB(
                             255,
                             255,
-                            217,
-                            103,
+                            43,
+                            43,
                           ),
                         ),
-                        child: const Text("Login"),
+                        child: const Text(
+                          "LOGIN",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
 
-                const SizedBox(height: 32),
+                const SizedBox(height: 16),
+
+                Text("Or"),
+
+                const SizedBox(height: 16),
 
                 _isLoading
                     ? const SizedBox.shrink()
