@@ -13,25 +13,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  
+
   bool _isLoading = false;
-  Future<void> _login() async {
+
+  Future<void> _signUp() async {
     final email = _emailController.text.trim();
     final password = _passwordController.text.trim();
+    final confirmPassword = _confirmPasswordController.text.trim();
 
-    if (email.isEmpty || password.isEmpty) {
+    if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please fill in all fields')),
+        const SnackBar(content: Text("Please fill in all fields")),
       );
       return;
     }
 
-    setState(() {
-      _isLoading = true;
-    });
+    if (password != confirmPassword) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Passwords do not match")));
+      return;
+    }
+
+    setState(() => _isLoading = true);
 
     try {
-      await context.read<AuthServiceProvider>().signIn(
+      await context.read<AuthServiceProvider>().createAccount(
         email: email,
         password: password,
       );
@@ -39,7 +46,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(const SnackBar(content: Text('Login Successful!')));
+        ).showSnackBar(const SnackBar(content: Text("Sign Up Successful!")));
+      }
+
+      _emailController.clear();
+      _passwordController.clear();
+      _confirmPasswordController.clear();
+
+    } catch (error) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(error.toString())));
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
+  }
+
+  Future<void> _signUpWithGoogle() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final credential = await context
+          .read<AuthServiceProvider>()
+          .signInWithGoogle();
+
+      if (credential != null && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Account created via Google successfully!'),
+          ),
+        );
       }
     } catch (error) {
       if (mounted) {
@@ -130,7 +172,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             _isLoading
                 ? const CircularProgressIndicator(color: Colors.amber)
                 : ElevatedButton(
-                    onPressed: _login,
+                    onPressed: _signUp,
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 50),
                       backgroundColor: const Color.fromARGB(255, 255, 217, 103),
@@ -138,6 +180,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: const Text("Sign Up"),
                   ),
 
+            const SizedBox(height: 32),
+
+            _isLoading
+                ? const CircularProgressIndicator(color: Colors.amber)
+                : OutlinedButton.icon(
+                    onPressed: _signUpWithGoogle,
+                    icon: Image.asset(
+                      'assets/googleIcon.png',
+                      height: 24,
+                      width: 24,
+                    ),
+                    label: const Text("Sign up with Google"),
+                    style: OutlinedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 50),
+                      foregroundColor: Colors.black,
+                      side: const BorderSide(
+                        color: Colors.black,
+                        style: BorderStyle.solid,
+                      ),
+                    ),
+                  ),
           ],
         ),
       ),

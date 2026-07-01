@@ -41,6 +41,10 @@ class _LoginScreenState extends State<LoginScreen> {
           context,
         ).showSnackBar(const SnackBar(content: Text('Login Successful!')));
       }
+
+      _emailController.clear();
+      _passwordController.clear();
+    
     } catch (error) {
       if (mounted) {
         ScaffoldMessenger.of(
@@ -62,8 +66,10 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     try {
-      final credential = await context.read<AuthServiceProvider>().signInWithGoogle();
-      
+      final credential = await context
+          .read<AuthServiceProvider>()
+          .signInWithGoogle();
+
       if (credential != null && mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Google Login Successful!')),
@@ -72,9 +78,9 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     } catch (error) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(error.toString())),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(error.toString())));
       }
     } finally {
       if (mounted) {
@@ -165,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 32),
 
                 _isLoading
-                    ? const SizedBox.shrink() 
+                    ? const SizedBox.shrink()
                     : OutlinedButton.icon(
                         onPressed: _loginWithGoogle,
                         icon: Image.asset(
@@ -177,7 +183,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: OutlinedButton.styleFrom(
                           minimumSize: const Size(double.infinity, 50),
                           foregroundColor: Colors.black,
-                          side: const BorderSide(color: Colors.white),
+                          side: const BorderSide(
+                            color: Colors.black,
+                            style: BorderStyle.solid,
+                          ),
                         ),
                       ),
 
