@@ -26,6 +26,22 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
+    // final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    // if (!emailRegex.hasMatch(email)) {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     const SnackBar(content: Text('Please enter a valid email address')),
+    //   );
+    //   return;
+    // }
+
+    // final passwordRegex = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)');
+    // if (password.length < 8 || !passwordRegex.hasMatch(password)) {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     const SnackBar(content: Text('Password must be at least 8 chars with letters and numbers')),
+    //   );
+    //   return;
+    // }
+
     setState(() {
       _isLoading = true;
     });
@@ -107,9 +123,11 @@ class _LoginScreenState extends State<LoginScreen> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             colors: [
-              const Color.fromARGB(255, 0, 16, 162),
-              Colors.blue.shade300,
-              Colors.blue.shade100,
+              // const Color(0xFF0010A2),
+              // Colors.blue.shade300,
+              // Colors.blue.shade100,
+              const Color(0xFFDBDEFF),
+              Colors.white
             ],
           ),
         ),
@@ -119,15 +137,15 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 30),
-                const Text(
+                Text(
                   "Login",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 32,
-                    color: Colors.white,
+                    color: Color(0xFF0010A2),
                   ),
                 ),
-                const Icon(Icons.people, size: 80, color: Colors.white),
+                const Icon(Icons.people, size: 80, color: Color(0xFF0010A2)),
                 const SizedBox(height: 32),
 
                 TextField(
@@ -146,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextField(
                   controller: _passwordController,
                   obscureText: true,
-                  decoration:  InputDecoration(
+                  decoration: InputDecoration(
                     labelText: "Password",
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey),
@@ -162,12 +180,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: _login,
                         style: ElevatedButton.styleFrom(
                           minimumSize: const Size(double.infinity, 50),
-                          backgroundColor: const Color.fromARGB(
-                            255,
-                            255,
-                            43,
-                            43,
-                          ),
+                          backgroundColor: const Color(0xFF0010A2),
                         ),
                         child: const Text(
                           "LOGIN",
@@ -177,7 +190,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 const SizedBox(height: 16),
 
-                Text("Or"),
+                Row(
+                  children:[
+                    Expanded(child: Divider(color: const Color(0xFF0010A2), thickness: 1)),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("Or Continue with", style: TextStyle(color: const Color(0xFF0010A2))),
+                    ),
+                    Expanded(child: Divider(color: const Color(0xFF0010A2), thickness: 1)),
+                  ]
+                ),
+                // Text("Or Continue with"),
 
                 const SizedBox(height: 16),
 
@@ -193,11 +216,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         label: const Text("Sign in with Google"),
                         style: OutlinedButton.styleFrom(
                           minimumSize: const Size(double.infinity, 50),
-                          foregroundColor: Colors.black,
+                          foregroundColor: Colors.white,
                           side: const BorderSide(
                             color: Colors.black,
                             style: BorderStyle.solid,
                           ),
+                          backgroundColor: const Color(0xFF0010A2),
                         ),
                       ),
 
